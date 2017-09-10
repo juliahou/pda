@@ -45,10 +45,12 @@ def distress():
     for user in users:
         if json['id'] != user.id:
             send_push_message(user.token, "WOOO PUSH NOTIFICATION")
+    return ('', 204)
 
-@app.route('/add_user', methods=['POST'])
+@app.route('/adduser', methods=['POST'])
 def add_user():
     json = request.get_json()
+    print(json)
     new_user = User(json['username'], json['password'], json['token'], json['location'])
     new_user.display_name = 'cat'
     db.session.add(new_user)
